@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasil Love Language – bakat.id</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --lav: #C8405A;
+  --lav-light: #F2A0B0;
+  --lav-pale: #FDF0F2;
+  --lav-deep: #7D1A2E;
+  --cream: #FBF8F4;
+  --warm-white: #FEFCFA;
+  --blush: #F7D6DC;
+  --ink: #1C1016;
+  --ink-mid: #4A2D35;
+  --ink-muted: #8C6870;
+  --gold: #C4923A;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--ink); min-height: 100%;
+  background: var(--warm-white);
+}
+
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(200,64,90,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.app {
+  position: relative; z-index: 1;
+  max-width: 430px; margin: 0 auto;
+  min-height: 100dvh;
+  display: flex; flex-direction: column;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom));
+}
+
+/* ── HEADER ──────────────────────────────── */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 20px 6px;
+}
+.logo { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; color: var(--ink); }
+.header-share-btn {
+  background: var(--lav);
+  border: none; border-radius: 100px; padding: 7px 14px;
+  color: #fff; font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12px; font-weight: 500; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(200,64,90,0.28);
+  transition: background 0.18s, transform 0.15s;
+}
+.header-share-btn:hover { background: var(--lav-deep); transform: translateY(-1px); }
+.header-share-btn:active { transform: scale(0.97); }
+
+/* ── TOP SECTION ──────────────────────────── */
+.top-section { text-align: center; padding: 6px 20px 0; }
+.top-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--lav); margin-bottom: 4px;
+}
+.top-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 8vw, 36px); font-weight: 700;
+  letter-spacing: -0.01em; line-height: 1.1; color: var(--ink);
+}
+
+/* ── POLAROID SECTION ─────────────────────── */
+.card-section {
+  display: flex; justify-content: center;
+  padding: 0 20px; margin-top: 32px;
+}
+.card-wrap-primary {
+  position: relative; width: 55%;
+  display: flex; flex-direction: column; align-items: center;
+}
+.polaroid {
+  background: linear-gradient(180deg, #f7ede0 0%, #ede2d0 100%);
+  border-radius: 14px; padding: 8px 8px 20px; width: 100%;
+  box-shadow:
+    rgba(200,64,90,0.18) 0 8px 32px,
+    rgba(255,252,250,0.55) 2px 2px 0 inset,
+    rgba(200,64,90,0.10) 0 20px 50px,
+    rgba(0,0,0,0.05) 0 4px 12px;
+  transform: rotate(2deg);
+  animation: polFloat 5.5s ease-in-out infinite 0.6s;
+  position: relative; z-index: 2;
+}
+@keyframes polFloat {
+  0%,100% { transform: rotate(2deg) translateY(0); }
+  50%      { transform: rotate(2deg) translateY(-7px); }
+}
+.pi {
+  border-radius: 8px; overflow: hidden;
+  height: 148px; position: relative;
+  box-shadow: rgba(0,0,0,0.15) 0 0 8px inset;
+}
+.pi-bg    { position: absolute; inset: 0; z-index: 0; }
+.pi-gl    { display: none; }
+.pi-gr    { display: none; }
+.pi-gc    { display: none; }
+.pi-label {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+  padding: 24px 8px 7px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.72));
+  font-size: 10px; font-weight: 700; color: #fff;
+  text-align: center; line-height: 1.3;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
+.polaroid-name {
+  text-align: center; margin-top: 9px;
+  font-size: 12px; font-weight: 700; color: var(--ink-mid);
+  letter-spacing: 0.03em;
+}
+
+/* ── VIBES BLOCK ──────────────────────────── */
+.vibes-block {
+  margin: 18px 22px 0;
+  padding: 16px 20px 14px;
+  background: rgba(200,64,90,0.05);
+  border: 1px solid rgba(200,64,90,0.18);
+  border-radius: 14px;
+  font-size: 13px; font-weight: 400;
+  color: var(--ink-mid); line-height: 1.7;
+  position: relative; overflow: hidden;
+}
+.vibes-block::before {
+  content: '✦';
+  position: absolute; top: 10px; right: 14px;
+  font-size: 22px; color: var(--lav-light); opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ── TRAITS ───────────────────────────────── */
+.traits-section { margin: 18px 22px 0; }
+.section-eyebrow {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--lav); margin-bottom: 12px; display: block;
+}
+.bullet-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 14px; border-radius: 12px;
+  background: rgba(200,64,90,0.04);
+  border: 1px solid rgba(200,64,90,0.10);
+  margin-bottom: 7px;
+}
+.bullet-dot {
+  width: 6px; min-width: 6px; height: 6px; border-radius: 50%;
+  background: var(--lav); flex-shrink: 0; margin-top: 6px;
+}
+.bullet-text { font-size: 13px; color: var(--ink-mid); line-height: 1.55; }
+
+/* ── DIVIDER ──────────────────────────────── */
+.divider {
+  height: 1px; margin: 18px 22px 0;
+  background: linear-gradient(90deg, transparent, rgba(200,64,90,0.18), transparent);
+}
+
+/* ── SHARE SECTION ───────────────────────── */
+.share-section {
+  padding: 14px 22px 0;
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+}
+.share-label {
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.share-icons {
+  display: flex; gap: 9px; align-items: center; flex-wrap: wrap; justify-content: center;
+}
+.share-icon-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(200,64,90,0.18);
+  background: rgba(200,64,90,0.05);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer;
+  transition: background 0.18s, transform 0.16s;
+}
+.share-icon-btn:active { transform: scale(0.91); background: rgba(200,64,90,0.12); }
+.share-icon-btn.wa      { background: #E6F9EE;  border-color: #25D366; color: #128C4E; }
+.share-icon-btn.x       { background: #E8E4E6;  border-color: rgba(0,0,0,0.55); color: #1C1016; }
+.share-icon-btn.ig      { background: #FDEEF1;  border-color: #C8405A; color: #7D1A2E; }
+.share-icon-btn.copy    { background: #FDEEF1;  border-color: #C8405A; color: #7D1A2E; }
+.share-icon-btn.more    { background: #FDF4E7;  border-color: #C4923A; color: #7A5520; }
+
+/* ── CTA SECTION ──────────────────────────── */
+.cta-section {
+  padding: 18px 22px 0;
+  display: flex; flex-direction: column; gap: 9px;
+}
+.cta-primary {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; border: none; border-radius: 100px; padding: 14px 24px;
+  background: var(--lav); box-shadow: 0 4px 20px rgba(200,64,90,0.30);
+  cursor: pointer; font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 500; font-size: 14px; color: #fff;
+  transition: transform 0.18s, background 0.18s;
+}
+.cta-primary:hover { background: var(--lav-deep); transform: translateY(-2px); }
+.cta-primary:active { transform: scale(0.97); }
+.cta-secondary {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; border: 1px solid rgba(200,64,90,0.25); border-radius: 100px;
+  padding: 13px 24px; background: transparent;
+  cursor: pointer; font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 400; font-size: 13px; color: var(--ink-mid);
+  transition: border-color 0.18s, color 0.18s;
+}
+.cta-secondary:hover { border-color: var(--lav); color: var(--lav); }
+.cta-secondary:active { transform: scale(0.97); }
+.cta-ghost {
+  background: none; border: none; cursor: pointer;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12.5px; color: var(--ink-muted); text-align: center;
+  transition: color 0.18s;
+}
+.cta-ghost:hover { color: var(--lav); }
+
+/* ── SPARKLES ──────────────────────────────── */
+.sp {
+  position: fixed; background: var(--lav-light); border-radius: 50%;
+  pointer-events: none;
+  animation: spTwinkle var(--d,2s) ease-in-out infinite var(--dl,0s);
+}
+@keyframes spTwinkle {
+  0%,100% { opacity: 0.06; transform: scale(0.3); }
+  50%      { opacity: 0.50; transform: scale(1); }
+}
+
+/* ── TOAST ───────────────────────────────── */
+.toast {
+  position: fixed; bottom: calc(28px + env(safe-area-inset-bottom)); left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: #fff; border-radius: 100px;
+  padding: 9px 18px; font-size: 13px; font-weight: 500;
+  white-space: nowrap; pointer-events: none; z-index: 9998;
+  opacity: 0; transition: opacity 0.2s, transform 0.2s;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="app">
+
+  <div class="header">
+    <div class="logo">bakat.id</div>
+    <button class="header-share-btn" onclick="shareToSocial('native')">↗ Bagikan</button>
+  </div>
+
+  <!-- TOP -->
+  <div class="top-section">
+    <div class="top-eyebrow">Kayaknya kamu tipe</div>
+    <div class="top-title" id="topTitle">—</div>
+  </div>
+
+  <!-- POLAROID -->
+  <div class="card-section">
+    <div class="card-wrap-primary">
+      <div class="polaroid">
+        <div class="pi">
+          <div class="pi-bg" id="primaryBg"></div>
+          <div class="pi-gl"></div><div class="pi-gr"></div><div class="pi-gc"></div>
+          <div class="pi-label" id="primaryLabel"></div>
+        </div>
+        <div class="polaroid-name" id="primaryName"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESKRIPSI -->
+  <div class="vibes-block" id="vibesBlock"></div>
+
+  <!-- TRAITS -->
+  <div class="traits-section">
+    <span class="section-eyebrow" id="traitEyebrow"></span>
+    <div id="bulletList"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SHARE -->
+  <div class="share-section">
+    <div class="share-label">Bagikan hasilmu</div>
+    <div class="share-icons">
+      <button class="share-icon-btn wa" onclick="shareToSocial('wa')" title="WhatsApp">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="#25D366"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L0 24l6.334-1.507A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.79 9.79 0 01-5.003-1.374l-.359-.213-3.756.894.952-3.65-.234-.375A9.784 9.784 0 012.182 12C2.182 6.577 6.577 2.182 12 2.182S21.818 6.577 21.818 12 17.423 21.818 12 21.818z" fill="#25D366"/>
+        </svg>
+      </button>
+      <button class="share-icon-btn x" onclick="shareToSocial('x')" title="X / Twitter">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="#1C1016">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </button>
+      <button class="share-icon-btn ig" onclick="shareToSocial('instagram')" title="Instagram">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="#C8405A">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+        </svg>
+      </button>
+      <button class="share-icon-btn copy" onclick="shareToSocial('copy')" title="Salin Link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8405A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+        </svg>
+      </button>
+      <button class="share-icon-btn more" onclick="shareToSocial('native')" title="Lainnya">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4923A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section" id="ctaSection"></div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data/love_language_data.js"></script>
+<script>
+// ── PAGE TRANSITIONS ──────────────────────────────────────────
+function _rippleEl(x, y, filled) {
+  const el = document.createElement('div');
+  const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 40;
+  el.style.cssText = `position:fixed;left:${x}px;top:${y}px;width:${r*2}px;height:${r*2}px;` +
+    `margin-left:${-r}px;margin-top:${-r}px;border-radius:50%;background:#F7D6DC;` +
+    `z-index:9999;pointer-events:none;transform:scale(${filled?1:0});transition:none;`;
+  document.body.appendChild(el);
+  return el;
+}
+function rippleTo(evtOrNull, url) {
+  const x = evtOrNull?.clientX ?? innerWidth / 2;
+  const y = evtOrNull?.clientY ?? innerHeight / 2;
+  sessionStorage.setItem('_rp', x / innerWidth + ',' + y / innerHeight);
+  const el = _rippleEl(x, y, false);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    el.style.transition = 'transform 0.5s cubic-bezier(0.4,0,1,1)';
+    el.style.transform = 'scale(1)';
+  }));
+  setTimeout(() => { location.href = url; }, 520);
+}
+(function() {
+  const rp = sessionStorage.getItem('_rp');
+  sessionStorage.removeItem('_rp');
+  const parts = rp ? rp.split(',').map(Number) : [0.5, 0.5];
+  const x = parts[0] * innerWidth, y = parts[1] * innerHeight;
+  const el = _rippleEl(x, y, true);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    el.style.transition = 'transform 0.5s cubic-bezier(0,0,0.2,1)';
+    el.style.transform = 'scale(0)';
+    setTimeout(() => el.remove(), 550);
+  }));
+})();
+
+const type   = new URLSearchParams(location.search).get('type') || 'receiving';
+const KEY    = `llResult${type.charAt(0).toUpperCase() + type.slice(1)}`;
+const result = JSON.parse(localStorage.getItem(KEY) || 'null');
+
+if (!result) {
+  window.location.href = 'index.html';
+} else {
+  buildPage();
+}
+
+function buildPage() {
+  const lib        = LL.library[type];
+  const primary    = lib[result.primary];
+  const otherType  = type === 'receiving' ? 'giving' : 'receiving';
+  const hasOther   = !!localStorage.getItem(`llResult${otherType.charAt(0).toUpperCase() + otherType.slice(1)}`);
+  const isReceiving = type === 'receiving';
+
+  // Header
+  document.getElementById('topTitle').textContent = primary.label;
+
+  // Polaroid
+  document.getElementById('primaryBg').style.background = primary.bg;
+  document.getElementById('primaryLabel').textContent = primary.label;
+  document.getElementById('primaryName').textContent =
+    (isReceiving ? '💌 Receiving' : '🎁 Giving') + ' · Primary';
+
+  // Deskripsi singkat
+  document.getElementById('vibesBlock').textContent = primary.deskripsiSingkat;
+
+  // Traits bullets
+  const traitKey = isReceiving ? 'yangBikinLuluh' : 'caraMenunjukkan';
+  document.getElementById('traitEyebrow').textContent =
+    isReceiving ? 'Yang bikin kamu merasa dicintai' : 'Cara kamu menunjukkan rasa sayang';
+  const items = primary[traitKey] || [];
+  document.getElementById('bulletList').innerHTML = items.map(t => `
+    <div class="bullet-row">
+      <div class="bullet-dot"></div>
+      <div class="bullet-text">${t}</div>
+    </div>
+  `).join('');
+
+  // CTA
+  const cta = document.getElementById('ctaSection');
+  if (hasOther) {
+    cta.innerHTML = `
+      <button class="cta-primary" onclick="rippleTo(event,'result-combined.html')">
+        ✨ Lihat Profil Kombinasimu
+      </button>
+      <button class="cta-secondary" onclick="rippleTo(event,'report.html?type=${type}')">
+        Lihat Laporan Lengkap
+      </button>
+      <button class="cta-ghost" onclick="window.location.href='index.html'">← Kembali ke Beranda</button>
+    `;
+  } else {
+    const reportViewed = !!localStorage.getItem(`llReportViewed_${type}`);
+    const otherLabel = otherType === 'giving' ? '🎁 Coba Giving juga?' : '💌 Coba Receiving juga?';
+    const otherSub   = otherType === 'giving'
+      ? 'Lihat cara kamu secara natural menunjukkan rasa sayang.'
+      : 'Lihat cara kamu paling nyaman menerima cinta.';
+    const otherBtn = reportViewed
+      ? `<button class="cta-secondary" onclick="rippleTo(event,'test.html?mode=${otherType}')">${otherLabel}</button>`
+      : `<button class="cta-secondary" style="opacity:0.45;cursor:default;border-style:dashed;" disabled>🔒 ${otherLabel}</button>
+         <div style="font-size:11px;color:var(--lav);text-align:center;margin-top:-4px;">Buka laporan dulu untuk unlock ✦</div>`;
+    cta.innerHTML = `
+      <button class="cta-primary" onclick="rippleTo(event,'report.html?type=${type}')">
+        Lihat Laporan Lengkap
+      </button>
+      <div style="margin:4px 0 2px">
+        <div style="font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);text-align:center;margin-bottom:8px;">Lanjutkan Eksplorasimu</div>
+        ${otherBtn}
+      </div>
+      <button class="cta-ghost" onclick="window.location.href='index.html'">← Kembali ke Beranda</button>
+    `;
+  }
+
+  // Sparkles
+  [
+    { s:4, t:'12%', l:'8%',  d:'2.1s', dl:'0s'   },
+    { s:3, t:'20%', l:'88%', d:'1.8s', dl:'0.5s' },
+    { s:5, t:'65%', l:'5%',  d:'2.8s', dl:'0.9s' },
+    { s:3, t:'75%', l:'92%', d:'2.2s', dl:'0.4s' },
+  ].forEach(({ s, t, l, d, dl }) => {
+    const sp = document.createElement('div');
+    sp.className = 'sp';
+    sp.style.cssText = `width:${s}px;height:${s}px;top:${t};left:${l};--d:${d};--dl:${dl};`;
+    document.body.appendChild(sp);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function shareToSocial(platform) {
+  if (!result) return;
+  const primary  = LL.library[type][result.primary];
+  const shareText = `Love Language ${type === 'receiving' ? 'Receiving' : 'Giving'}-ku: ${primary.label} ${primary.emoji}\n${primary.tagline}\n\nCari tahu love language kamu di bakat.id`;
+  const shareUrl  = window.location.href;
+
+  if (platform === 'copy') {
+    navigator.clipboard.writeText(shareUrl).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = shareUrl; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    });
+    showToast('🔗 Link tersalin!');
+    return;
+  }
+  if (platform === 'wa') {
+    window.open('https://wa.me/?text=' + encodeURIComponent(shareText + '\n' + shareUrl), '_blank');
+    return;
+  }
+  if (platform === 'x') {
+    window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(shareUrl), '_blank');
+    return;
+  }
+  if (platform === 'instagram') {
+    navigator.clipboard?.writeText(shareText + '\n' + shareUrl);
+    showToast('📋 Teks tersalin, paste di Instagram!');
+    return;
+  }
+  // native / more
+  if (navigator.share) {
+    navigator.share({ title: `Love Language: ${primary.label}`, text: shareText, url: shareUrl }).catch(() => {});
+  } else {
+    navigator.clipboard?.writeText(shareText + '\n' + shareUrl);
+    showToast('🔗 Link tersalin!');
+  }
+}
+</script>
+</body>
+</html>

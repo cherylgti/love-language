@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Lengkap – Love Language</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --lav: #C8405A;
+  --lav-light: #F2A0B0;
+  --lav-pale: #FDF0F2;
+  --lav-deep: #7D1A2E;
+  --cream: #FBF8F4;
+  --warm-white: #FEFCFA;
+  --blush: #F7D6DC;
+  --ink: #1C1016;
+  --ink-mid: #4A2D35;
+  --ink-muted: #8C6870;
+  --gold: #C4923A;
+  --gold-light: #F0D5A0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--ink); min-height: 100%;
+  background: var(--warm-white);
+}
+
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(200,64,90,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.app {
+  position: relative; z-index: 1;
+  max-width: 430px; margin: 0 auto;
+  min-height: 100dvh; display: flex; flex-direction: column;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+}
+
+/* ── HEADER ───────────────────────────────── */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 20px 10px; position: sticky; top: 0; z-index: 10;
+  background: rgba(254,252,250,0.88);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,64,90,0.10);
+}
+.back-link {
+  background: rgba(200,64,90,0.08);
+  border: 1px solid rgba(200,64,90,0.18);
+  border-radius: 100px; padding: 6px 14px;
+  font-size: 12px; font-weight: 500; color: var(--ink-mid);
+  cursor: pointer; text-decoration: none;
+  transition: background 0.18s;
+}
+.back-link:active { background: rgba(200,64,90,0.16); }
+.logo { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; color: var(--ink); }
+.share-btn {
+  background: var(--lav); border: none; border-radius: 100px; padding: 7px 14px;
+  color: #fff; font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12px; font-weight: 500; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(200,64,90,0.28);
+  transition: background 0.18s, transform 0.15s;
+}
+.share-btn:active { transform: scale(0.97); }
+
+/* ── HERO SECTION ─────────────────────────── */
+.hero-section { padding: 20px 22px 0; text-align: center; }
+.hero-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--lav); margin-bottom: 6px;
+}
+.hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(26px, 7.5vw, 34px); font-weight: 700;
+  letter-spacing: -0.01em; line-height: 1.1; color: var(--ink);
+  margin-bottom: 6px;
+}
+.hero-subtitle {
+  font-size: 13px; color: var(--ink-muted);
+  line-height: 1.6; margin-bottom: 16px;
+}
+
+/* ── POLAROID ─────────────────────────────── */
+.card-section {
+  display: flex; gap: 14px; justify-content: center; align-items: flex-start;
+  padding: 0 20px; margin-top: 24px;
+}
+.pol-wrap { position: relative; }
+.pol-wrap:first-child { flex: 1.28; }
+.pol-wrap:last-child  { flex: 0.80; }
+.pol-badge {
+  position: absolute; top: -9px; left: -9px; z-index: 10;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.20);
+}
+.pol-badge-1 { background: var(--lav); }
+.pol-badge-2 { background: var(--ink-muted); }
+.polaroid {
+  background: linear-gradient(180deg, #f7ede0 0%, #ede2d0 100%);
+  border-radius: 14px; padding: 7px 7px 18px;
+  width: 100%;
+  position: relative; z-index: 2;
+}
+.polaroid.pol-primary {
+  transform: rotate(-2deg);
+  animation: polFloat 5.5s ease-in-out infinite 0.6s;
+  box-shadow:
+    rgba(200,64,90,0.22) 0 10px 38px,
+    rgba(255,252,250,0.55) 2px 2px 0 inset,
+    rgba(200,64,90,0.14) 0 24px 56px,
+    rgba(0,0,0,0.07) 0 5px 14px;
+}
+.polaroid.pol-secondary {
+  transform: rotate(2.5deg);
+  animation: polFloat2 5.8s ease-in-out infinite 1.2s;
+  opacity: 0.78;
+  box-shadow:
+    rgba(200,64,90,0.08) 0 4px 14px,
+    rgba(0,0,0,0.04) 0 2px 6px;
+}
+@keyframes polFloat {
+  0%,100% { transform: rotate(-2deg) translateY(0); }
+  50%      { transform: rotate(-2deg) translateY(-9px); }
+}
+@keyframes polFloat2 {
+  0%,100% { transform: rotate(2.5deg) translateY(0); }
+  50%      { transform: rotate(2.5deg) translateY(-4px); }
+}
+.pi {
+  border-radius: 8px; overflow: hidden;
+  position: relative;
+  box-shadow: rgba(0,0,0,0.15) 0 0 8px inset;
+}
+.pol-primary .pi  { height: 134px; }
+.pol-secondary .pi { height: 108px; }
+.pi-bg { position: absolute; inset: 0; z-index: 0; }
+.pi-label {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+  padding: 20px 6px 6px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.72));
+  font-size: 9.5px; font-weight: 700; color: #fff;
+  text-align: center; line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
+.polaroid-sub {
+  text-align: center; margin-top: 7px;
+  font-size: 10px; font-weight: 600; color: var(--ink-mid);
+  letter-spacing: 0.04em;
+}
+
+/* ── SECTION GENERIC ──────────────────────── */
+.section { margin: 20px 22px 0; }
+.section-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  border-left: 3px solid var(--section-accent, var(--lav));
+  padding-left: 10px;
+}
+.section-label {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--section-accent, var(--lav));
+}
+
+/* per-section accent colors */
+.section-desc     { --section-accent: #C8405A; }
+.section-desc-sec { --section-accent: var(--ink-muted); margin-top: 12px; }
+.section-luluh    { --section-accent: #D4607A; }
+.section-neg      { --section-accent: #7D1A2E; }
+.section-flag     { --section-accent: #5EA87A; }
+.desc-sec-body { font-size: 13px; color: var(--ink-muted); line-height: 1.75; }
+.section-body {
+  font-size: 14px; font-weight: 400; line-height: 1.8;
+  color: var(--ink-mid);
+}
+
+/* ── CARD SECTIONS (luluh / neg / flag) ───── */
+.section-luluh, .section-neg, .section-flag {
+  margin: 14px 18px 0;
+  padding: 16px 16px 14px;
+  border-radius: 18px;
+}
+.section-luluh { background: rgba(200,64,90,0.05);  border: 1px solid rgba(200,64,90,0.14); }
+.section-neg   { background: rgba(125,26,46,0.05);  border: 1px solid rgba(125,26,46,0.12); }
+.section-flag  { background: rgba(94,168,122,0.06); border: 1px solid rgba(94,168,122,0.18); }
+
+/* card sections: no border-left strip, replaced by icon */
+.section-luluh .section-header,
+.section-neg .section-header,
+.section-flag .section-header {
+  border-left: none; padding-left: 0; margin-bottom: 14px;
+}
+
+/* section header icon circle */
+.section-hd-icon {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
+}
+.section-luluh .section-hd-icon { background: rgba(200,64,90,0.12); }
+.section-neg   .section-hd-icon { background: rgba(125,26,46,0.10); }
+.section-flag  .section-hd-icon { background: rgba(94,168,122,0.15); }
+
+/* ── INFO LIST (replaces chips) ─────────────── */
+.info-list { display: flex; flex-direction: column; gap: 9px; }
+.info-item { display: flex; align-items: center; gap: 10px; }
+.info-ic {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+}
+.section-luluh .info-ic { background: rgba(200,64,90,0.12); color: #D4607A; }
+.section-neg   .info-ic { background: rgba(125,26,46,0.10); color: #7D1A2E; }
+.section-flag  .info-ic { background: rgba(94,168,122,0.18); color: #5EA87A; }
+.info-text {
+  font-size: 13px; font-weight: 400; color: var(--ink-mid); line-height: 1.45;
+}
+.section-flag .info-text { font-style: italic; }
+
+/* ── TWO-COL ──────────────────────────────── */
+.two-col { display: flex; gap: 10px; }
+.col-card {
+  flex: 1; border-radius: 14px; padding: 14px 14px;
+  border: 1px solid rgba(200,64,90,0.14);
+}
+.col-card.plus  { background: rgba(94,168,122,0.06);  border-color: rgba(94,168,122,0.20); }
+.col-card.minus { background: rgba(212,127,170,0.06); border-color: rgba(212,127,170,0.20); }
+.col-card-title {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 9px;
+}
+.col-card.plus  .col-card-title { color: #3D8A5C; }
+.col-card.minus .col-card-title { color: #9E4A6E; }
+.col-item {
+  font-size: 12.5px; line-height: 1.5; color: var(--ink-mid);
+  margin-bottom: 6px;
+}
+
+
+/* ── COMBO SECTION ────────────────────────── */
+.combo-section {
+  margin: 20px 22px 0;
+  padding: 18px 20px;
+  background: rgba(200,64,90,0.05);
+  border: 1px solid rgba(200,64,90,0.18);
+  border-radius: 16px;
+}
+.combo-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px; font-weight: 700; color: var(--ink);
+  margin-bottom: 8px;
+}
+.combo-type {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--lav); margin-bottom: 12px; display: block;
+}
+.combo-narasi { font-size: 13.5px; line-height: 1.75; color: var(--ink-mid); }
+
+/* ── SCORE CHART ──────────────────────────── */
+.score-section {
+  margin: 14px 18px 0;
+  padding: 16px 16px 14px;
+  border-radius: 18px;
+  background: rgba(200,64,90,0.04);
+  border: 1px solid rgba(200,64,90,0.12);
+}
+.score-section .section-header { border-left: none; padding-left: 0; margin-bottom: 16px; }
+.score-section .section-label  { --section-accent: #C8405A; }
+.score-row {
+  display: flex; align-items: center; gap: 9px; margin-bottom: 10px;
+}
+.score-row:last-child { margin-bottom: 0; }
+.score-emoji {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(200,64,90,0.10); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.score-name {
+  font-size: 11.5px; font-weight: 500; color: var(--ink-mid);
+  width: 110px; flex-shrink: 0; line-height: 1.3;
+}
+.score-track {
+  flex: 1; height: 9px; border-radius: 100px;
+  background: rgba(200,64,90,0.08); overflow: hidden;
+}
+.score-fill {
+  height: 100%; border-radius: 100px; width: 0;
+  transition: width 0.75s cubic-bezier(0.34,1.1,0.64,1);
+}
+.score-pct {
+  font-size: 11px; font-weight: 600; color: var(--ink-muted);
+  width: 30px; text-align: right; flex-shrink: 0;
+}
+
+/* ── TABS ─────────────────────────────────── */
+.tab-bar {
+  position: sticky;
+  z-index: 9;
+  display: flex;
+  background: rgba(254,252,250,0.92);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(200,64,90,0.10);
+  padding: 0 20px;
+  margin-top: 20px;
+}
+.tab-btn {
+  flex: 1; padding: 12px 8px 10px;
+  background: none; border: none; border-bottom: 2px solid transparent;
+  cursor: pointer; font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--ink-muted); transition: color 0.2s, border-color 0.2s;
+  margin-bottom: -1px;
+}
+.tab-btn.tab-active { color: var(--lav); border-bottom-color: var(--lav); }
+
+/* ── TAB SECTION ──────────────────────────── */
+.tab-section { padding-bottom: 6px; }
+.tab-section-divider {
+  height: 1px; margin: 24px 22px 0;
+  background: linear-gradient(90deg, transparent, rgba(200,64,90,0.18), transparent);
+}
+
+/* ── EQUAL POLAROIDS (combined view) ─────── */
+.card-section-equal .pol-wrap { flex: 1; }
+.card-section-equal .pi { height: 118px; }
+.pol-equal {
+  transform: rotate(-1.5deg);
+  animation: polFloat 5.5s ease-in-out infinite 0.6s;
+  box-shadow: rgba(200,64,90,0.16) 0 6px 24px, rgba(0,0,0,0.06) 0 3px 10px;
+}
+.pol-equal-2 {
+  transform: rotate(2deg);
+  animation: polFloat2 5.8s ease-in-out infinite 1.2s;
+  box-shadow: rgba(200,64,90,0.12) 0 6px 20px, rgba(0,0,0,0.05) 0 3px 8px;
+}
+.pol-badge-rec { background: var(--lav); }
+.pol-badge-giv { background: var(--gold); }
+
+/* ── DIVIDER ──────────────────────────────── */
+.divider {
+  height: 1px; margin: 20px 22px 0;
+  background: linear-gradient(90deg, transparent, rgba(200,64,90,0.18), transparent);
+}
+
+/* ── SHARE SECTION ────────────────────────── */
+.share-section {
+  padding: 18px 22px 0;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.share-label {
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.share-icons {
+  display: flex; gap: 9px; align-items: center; flex-wrap: wrap; justify-content: center;
+}
+.share-icon-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(200,64,90,0.18);
+  background: rgba(200,64,90,0.05);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer;
+  transition: background 0.18s, transform 0.16s;
+}
+.share-icon-btn:active { transform: scale(0.91); background: rgba(200,64,90,0.12); }
+.share-icon-btn.wa      { background: rgba(37,211,102,0.10);  border-color: rgba(37,211,102,0.28); }
+.share-icon-btn.x       { background: rgba(28,16,22,0.05);    border-color: rgba(28,16,22,0.15); }
+.share-icon-btn.threads { background: rgba(28,16,22,0.05);    border-color: rgba(28,16,22,0.15); }
+.share-icon-btn.ig      { background: rgba(200,64,90,0.08);   border-color: rgba(200,64,90,0.22); }
+.share-icon-btn.copy    { background: rgba(200,64,90,0.08);   border-color: rgba(200,64,90,0.22); }
+.share-icon-btn.more    { background: rgba(196,146,58,0.10);  border-color: rgba(196,146,58,0.25); }
+
+/* ── SPARKLES ─────────────────────────────── */
+.sp {
+  position: fixed; background: var(--lav-light); border-radius: 50%;
+  pointer-events: none;
+  animation: spTwinkle var(--d,2s) ease-in-out infinite var(--dl,0s);
+}
+@keyframes spTwinkle {
+  0%,100% { opacity: 0.06; transform: scale(0.3); }
+  50%      { opacity: 0.50; transform: scale(1); }
+}
+
+/* ── TOAST ────────────────────────────────── */
+.toast {
+  position: fixed; bottom: calc(32px + env(safe-area-inset-bottom));
+  left: 50%; transform: translateX(-50%) translateY(24px);
+  background: var(--warm-white);
+  border: 1px solid rgba(200,64,90,0.20);
+  border-radius: 100px; padding: 10px 20px;
+  font-size: 13px; font-weight: 500; color: var(--ink-mid);
+  white-space: nowrap; z-index: 600;
+  box-shadow: 0 4px 20px rgba(200,64,90,0.12);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── CTA ──────────────────────────────────── */
+.cta-section { padding: 20px 22px 0; display: flex; flex-direction: column; gap: 9px; }
+.cta-primary {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; border: none; border-radius: 100px; padding: 14px 24px;
+  background: var(--lav); box-shadow: 0 4px 20px rgba(200,64,90,0.30);
+  cursor: pointer; font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 500; font-size: 14px; color: #fff;
+  transition: transform 0.18s, background 0.18s;
+}
+.cta-primary:hover { background: var(--lav-deep); transform: translateY(-2px); }
+.cta-primary:active { transform: scale(0.97); }
+.cta-ghost {
+  background: none; border: none; cursor: pointer;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12.5px; color: var(--ink-muted); text-align: center;
+}
+.cta-ghost:hover { color: var(--lav); }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div id="toast" class="toast"></div>
+
+<div class="app">
+
+  <div class="header">
+    <a class="back-link" id="backLink" href="#">← Hasil</a>
+    <div class="logo">bakat.id</div>
+    <button class="share-btn" onclick="shareToSocial('native')">↗ Share</button>
+  </div>
+
+  <div id="pageContent">
+
+  <div class="hero-section">
+    <div class="hero-eyebrow" id="heroEyebrow">Laporan Lengkap</div>
+    <div class="hero-title" id="heroTitle">Love Language Kamu</div>
+  </div>
+
+  <!-- POLAROID -->
+  <div class="card-section">
+    <div class="pol-wrap">
+      <div class="pol-badge pol-badge-1">1</div>
+      <div class="polaroid pol-primary">
+        <div class="pi">
+          <div class="pi-bg" id="pcBg"></div>
+          <div class="pi-label" id="pcLabel"></div>
+        </div>
+        <div class="polaroid-sub" id="pcSub"></div>
+      </div>
+    </div>
+    <div class="pol-wrap">
+      <div class="pol-badge pol-badge-2">2</div>
+      <div class="polaroid pol-secondary">
+        <div class="pi">
+          <div class="pi-bg" id="pcBg2"></div>
+          <div class="pi-label" id="pcLabel2"></div>
+        </div>
+        <div class="polaroid-sub" id="pcSub2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESKRIPSI PRIMARY -->
+  <div class="section section-desc">
+    <div class="section-header">
+      <span class="section-label" id="descLabel">Primary</span>
+    </div>
+    <div class="section-body" id="descBody"></div>
+  </div>
+
+  <!-- DESKRIPSI SECONDARY -->
+  <div class="section section-desc section-desc-sec">
+    <div class="section-header">
+      <span class="section-label" id="descLabel2">Secondary</span>
+    </div>
+    <div class="section-body desc-sec-body" id="descBody2"></div>
+  </div>
+
+  <!-- YANG BIKIN LULUH / CARA MENUNJUKKAN -->
+  <div class="section section-luluh">
+    <div class="section-header">
+      <div class="section-hd-icon" id="traitIcon">❤️</div>
+      <span class="section-label" id="traitLabel">Yang bikin kamu langsung luluh</span>
+    </div>
+    <div class="info-list" id="traitChips"></div>
+  </div>
+
+  <!-- YANG BIKIN NGGAK DIANGGAP / STRUGGLE -->
+  <div class="section section-neg">
+    <div class="section-header">
+      <div class="section-hd-icon" id="negIcon">😔</div>
+      <span class="section-label" id="negLabel">Yang bikin kamu ngerasa nggak dianggap</span>
+    </div>
+    <div class="info-list" id="negChips"></div>
+  </div>
+
+  <!-- GREEN FLAG -->
+  <div class="section section-flag">
+    <div class="section-header">
+      <div class="section-hd-icon">💚</div>
+      <span class="section-label">Green Flag yang Cocok Buat Kamu</span>
+    </div>
+    <div class="info-list" id="flagsList"></div>
+  </div>
+
+  <!-- SCORE CHART -->
+  <div class="section score-section">
+    <div class="section-header">
+      <span class="section-label" id="scoreTitle">Tendensi Love Language</span>
+    </div>
+    <div id="scoreChart"></div>
+  </div>
+
+  <!-- COMBO SECTION (conditional) -->
+  <div class="combo-section" id="comboSection" style="display:none">
+    <span class="combo-type" id="comboType"></span>
+    <div class="combo-title" id="comboTitle">Kombinasi Love Language-mu</div>
+    <div class="combo-narasi" id="comboNarasi"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cta-section" id="ctaSection">
+    <button class="cta-primary" onclick="window.location.href='index.html'">
+      Ulangi Tes
+    </button>
+  </div>
+
+  <!-- SHARE -->
+  <div class="share-section">
+    <div class="share-label">Bagikan laporanmu</div>
+    <div class="share-icons">
+
+      <!-- WhatsApp -->
+      <button class="share-icon-btn wa" onclick="shareToSocial('wa')" title="WhatsApp">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="#25D366"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L0 24l6.334-1.507A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.79 9.79 0 01-5.003-1.374l-.359-.213-3.756.894.952-3.65-.234-.375A9.784 9.784 0 012.182 12C2.182 6.577 6.577 2.182 12 2.182S21.818 6.577 21.818 12 17.423 21.818 12 21.818z" fill="#25D366"/>
+        </svg>
+      </button>
+
+      <!-- X / Twitter -->
+      <button class="share-icon-btn x" onclick="shareToSocial('x')" title="X / Twitter">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="rgba(28,16,22,0.80)">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </button>
+
+      <!-- Threads -->
+      <button class="share-icon-btn threads" onclick="shareToSocial('threads')" title="Threads">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(28,16,22,0.75)">
+          <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.473 12.01v-.017c.027-3.579.878-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-.487-1.821-1.382-3.264-2.66-4.29-1.24-.99-2.898-1.524-4.64-1.536-2.84.018-5.023.947-6.487 2.763-1.418 1.76-2.134 4.226-2.157 7.328.023 3.103.739 5.571 2.157 7.33 1.464 1.817 3.647 2.745 6.488 2.761 1.658-.012 3.032-.407 4.09-1.175.982-.714 1.628-1.736 1.921-3.047.186-.84.279-1.817.279-2.907 0-1.065-.093-2.028-.274-2.863a5.2 5.2 0 0 0-.812-1.978c-.42-.592-.98-1.04-1.666-1.336-.694-.3-1.527-.456-2.478-.467-1.34.012-2.429.437-3.24 1.267-.802.82-1.208 1.938-1.209 3.325.001 1.374.388 2.48 1.151 3.28.773.81 1.87 1.237 3.26 1.27 1.063-.027 2.006-.355 2.803-.979.13.173.25.34.362.499.192.27.355.512.49.726.087.14.16.265.22.37.06.103.106.187.137.248.102.199.162.348.178.44l.011.063c.02.11.03.225.03.342 0 .15-.016.295-.047.434l-.01.04a4.558 4.558 0 0 1-1.64 2.59C16.268 23.516 14.357 24 12.186 24z"/>
+        </svg>
+      </button>
+
+      <!-- Instagram -->
+      <button class="share-icon-btn ig" onclick="shareToSocial('instagram')" title="Instagram">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="#C8405A">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+        </svg>
+      </button>
+
+      <!-- Copy Link -->
+      <button class="share-icon-btn copy" onclick="shareToSocial('copy')" title="Salin Link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8405A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+        </svg>
+      </button>
+
+      <!-- More / Native -->
+      <button class="share-icon-btn more" onclick="shareToSocial('native')" title="Lainnya">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4923A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+
+  </div><!-- /#pageContent -->
+
+</div><!-- /.app -->
+
+<script src="data/love_language_data.js"></script>
+<script>
+const type = new URLSearchParams(location.search).get('type') || 'receiving';
+const recResult = JSON.parse(localStorage.getItem('llResultReceiving') || 'null');
+const givResult = JSON.parse(localStorage.getItem('llResultGiving')   || 'null');
+
+const CODE_EMOJI = { A: '💬', B: '⏰', C: '🎁', D: '🤝', E: '🤗' };
+const BAR_FILLS  = [
+  'rgba(200,64,90,1)',
+  'rgba(200,64,90,0.78)',
+  'rgba(200,64,90,0.56)',
+  'rgba(200,64,90,0.38)',
+  'rgba(200,64,90,0.22)',
+];
+
+// Mark this report type as viewed so result.html can unlock the "continue" CTA
+if (type === 'receiving' || type === 'giving') {
+  localStorage.setItem(`llReportViewed_${type}`, '1');
+}
+
+function el(id) { return document.getElementById(id); }
+
+if (type === 'combined') {
+  if (!recResult || !givResult) { window.location.href = 'index.html'; }
+  else buildCombined();
+} else {
+  const key = `llResult${type.charAt(0).toUpperCase() + type.slice(1)}`;
+  const result = JSON.parse(localStorage.getItem(key) || 'null');
+  if (!result) { window.location.href = 'index.html'; }
+  else buildSingle(type, result);
+}
+
+function buildSingle(t, result) {
+  const lib = LL.library[t];
+  const primary = lib[result.primary];
+  el('backLink').href = `result.html?type=${t}`;
+
+  el('heroEyebrow').textContent = t === 'receiving' ? '💌 Receiving — Laporan Lengkap' : '🎁 Giving — Laporan Lengkap';
+  el('heroTitle').textContent   = t === 'receiving' ? 'Cara Kamu Menerima Cinta' : 'Cara Kamu Memberi Cinta';
+
+  const secondary = lib[result.secondary];
+  el('pcBg').style.background  = primary.bg;
+  el('pcLabel').textContent    = primary.label;
+  el('pcSub').textContent      = 'Primary';
+  el('pcBg2').style.background = secondary.bg;
+  el('pcLabel2').textContent   = secondary.label;
+  el('pcSub2').textContent     = 'Secondary';
+
+  el('descLabel').textContent  = `Primary — ${primary.label}`;
+  el('descBody').textContent   = primary.deskripsi;
+  el('descLabel2').textContent = `Secondary — ${secondary.label}`;
+  el('descBody2').textContent  = secondary.deskripsiSingkat || secondary.deskripsi;
+
+  const traitKey = t === 'receiving' ? 'yangBikinLuluh'       : 'caraMenunjukkan';
+  const negKey   = t === 'receiving' ? 'yangBikinNggakDianggap' : 'yangBikinStruggle';
+  el('traitIcon').textContent  = t === 'receiving' ? '❤️' : '🤍';
+  el('negIcon').textContent    = t === 'receiving' ? '😔' : '😞';
+  el('traitLabel').textContent = t === 'receiving' ? 'Yang bikin kamu langsung luluh' : 'Cara kamu menunjukkan sayang';
+  el('negLabel').textContent   = t === 'receiving' ? 'Yang bikin kamu ngerasa nggak dianggap' : 'Hal yang kadang bikin struggle';
+
+  const icCheck = `<div class="info-ic">✓</div>`;
+  const icX     = `<div class="info-ic">✗</div>`;
+  el('traitChips').innerHTML = (primary[traitKey] || []).map(s => `<div class="info-item">${icCheck}<span class="info-text">${s}</span></div>`).join('');
+  el('negChips').innerHTML   = (primary[negKey]   || []).map(s => `<div class="info-item">${icX}<span class="info-text">${s}</span></div>`).join('');
+  el('flagsList').innerHTML  = (primary.greenFlag || []).map(f => `<div class="info-item">${icCheck}<span class="info-text">${f}</span></div>`).join('');
+
+  const typeLabel = t === 'receiving' ? 'Receiving' : 'Giving';
+  renderScoreChart(`Tendensi ${typeLabel} Love Language`, t, result.scores);
+
+  if (recResult && givResult) {
+    el('ctaSection').innerHTML = `
+      <button class="cta-primary" onclick="window.location.href='report.html?type=combined'">Lihat Profil Kombinasi</button>
+      <button class="cta-ghost" onclick="window.location.href='index.html'">Ulangi Tes</button>
+    `;
+  } else {
+    const otherMode  = t === 'receiving' ? 'giving' : 'receiving';
+    const otherLabel = t === 'receiving' ? 'Giving' : 'Receiving';
+    el('ctaSection').innerHTML = `
+      <button class="cta-primary" onclick="window.location.href='test.html?mode=${otherMode}'">Lanjut ke ${otherLabel} →</button>
+      <button class="cta-ghost" onclick="window.location.href='index.html'">Ulangi Tes</button>
+    `;
+  }
+}
+
+function buildScoreHTML(title, t, scores) {
+  if (!scores) return '';
+  const lib = LL.library[t];
+  const entries = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const maxScore = entries[0][1];
+  return `
+    <div class="section score-section">
+      <div class="section-header">
+        <span class="section-label">${title}</span>
+      </div>
+      ${entries.map(([code, score], i) => {
+        const pct = Math.round((score / maxScore) * 100);
+        const name = lib[code]?.label || code;
+        const emoji = CODE_EMOJI[code] || '✦';
+        return `<div class="score-row">
+          <div class="score-emoji">${emoji}</div>
+          <div class="score-name">${name}</div>
+          <div class="score-track"><div class="score-fill" data-pct="${pct}" style="background:${BAR_FILLS[i]};"></div></div>
+          <div class="score-pct">${pct}%</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function buildCombined() {
+  const recLib    = LL.library.receiving[recResult.primary];
+  const recSecLib = LL.library.receiving[recResult.secondary];
+  const givLib    = LL.library.giving[givResult.primary];
+  const givSecLib = LL.library.giving[givResult.secondary];
+  const comboKey  = `${recResult.primary}-${givResult.primary}`;
+  const combo     = LL.kombinasi[comboKey];
+
+  el('backLink').href = 'index.html';
+
+  const shareHTML = document.querySelector('.share-section').outerHTML;
+  const ck = `<div class="info-ic">✓</div>`;
+  const cx = `<div class="info-ic">✗</div>`;
+
+  const infoList = (items, icon) => (items || [])
+    .map(s => `<div class="info-item">${icon}<span class="info-text">${s}</span></div>`).join('');
+
+  document.getElementById('pageContent').innerHTML = `
+    <div class="hero-section">
+      <div class="hero-eyebrow">✨ Profil Kombinasi — Laporan Lengkap</div>
+      <div class="hero-title">Love Language Kamu Secara Utuh</div>
+    </div>
+
+    <div class="card-section card-section-equal">
+      <div class="pol-wrap">
+        <div class="pol-badge pol-badge-rec">💌</div>
+        <div class="polaroid pol-equal">
+          <div class="pi">
+            <div class="pi-bg" style="background:${recLib.bg}"></div>
+            <div class="pi-label">${recLib.label}</div>
+          </div>
+          <div class="polaroid-sub">Receiving</div>
+        </div>
+      </div>
+      <div class="pol-wrap">
+        <div class="pol-badge pol-badge-giv">🎁</div>
+        <div class="polaroid pol-equal pol-equal-2">
+          <div class="pi">
+            <div class="pi-bg" style="background:${givLib.bg}"></div>
+            <div class="pi-label">${givLib.label}</div>
+          </div>
+          <div class="polaroid-sub">Giving</div>
+        </div>
+      </div>
+    </div>
+
+    ${combo ? `
+    <div class="combo-section">
+      <span class="combo-type">${combo.type}</span>
+      <div class="combo-title">Kombinasi Love Language-mu</div>
+      <div class="combo-narasi">${combo.narasi}</div>
+    </div>` : ''}
+
+    <div class="tab-bar" id="tabBar">
+      <button class="tab-btn tab-active" data-tab="receiving" onclick="scrollToTab('tabReceiving')">💌 Receiving</button>
+      <button class="tab-btn" data-tab="giving" onclick="scrollToTab('tabGiving')">🎁 Giving</button>
+    </div>
+
+    <div class="tab-section" id="tabReceiving">
+      <div class="section section-desc">
+        <div class="section-header"><span class="section-label">Primary — ${recLib.label}</span></div>
+        <div class="section-body">${recLib.deskripsi}</div>
+      </div>
+      <div class="section section-desc section-desc-sec">
+        <div class="section-header"><span class="section-label">Secondary — ${recSecLib.label}</span></div>
+        <div class="section-body desc-sec-body">${recSecLib.deskripsiSingkat || recSecLib.deskripsi}</div>
+      </div>
+      <div class="section section-luluh">
+        <div class="section-header">
+          <div class="section-hd-icon">❤️</div>
+          <span class="section-label">Yang bikin kamu langsung luluh</span>
+        </div>
+        <div class="info-list">${infoList(recLib.yangBikinLuluh, ck)}</div>
+      </div>
+      <div class="section section-neg">
+        <div class="section-header">
+          <div class="section-hd-icon">😔</div>
+          <span class="section-label">Yang bikin kamu ngerasa nggak dianggap</span>
+        </div>
+        <div class="info-list">${infoList(recLib.yangBikinNggakDianggap, cx)}</div>
+      </div>
+      <div class="section section-flag">
+        <div class="section-header">
+          <div class="section-hd-icon">💚</div>
+          <span class="section-label">Green Flag yang Cocok Buat Kamu</span>
+        </div>
+        <div class="info-list">${infoList(recLib.greenFlag, ck)}</div>
+      </div>
+      ${buildScoreHTML('Tendensi Receiving Love Language', 'receiving', recResult.scores)}
+    </div>
+
+    <div class="tab-section-divider"></div>
+
+    <div class="tab-section" id="tabGiving">
+      <div class="section section-desc">
+        <div class="section-header"><span class="section-label">Primary — ${givLib.label}</span></div>
+        <div class="section-body">${givLib.deskripsi}</div>
+      </div>
+      <div class="section section-desc section-desc-sec">
+        <div class="section-header"><span class="section-label">Secondary — ${givSecLib.label}</span></div>
+        <div class="section-body desc-sec-body">${givSecLib.deskripsiSingkat || givSecLib.deskripsi}</div>
+      </div>
+      <div class="section section-luluh">
+        <div class="section-header">
+          <div class="section-hd-icon">🤍</div>
+          <span class="section-label">Cara kamu menunjukkan sayang</span>
+        </div>
+        <div class="info-list">${infoList(givLib.caraMenunjukkan, ck)}</div>
+      </div>
+      <div class="section section-neg">
+        <div class="section-header">
+          <div class="section-hd-icon">😞</div>
+          <span class="section-label">Hal yang kadang bikin struggle</span>
+        </div>
+        <div class="info-list">${infoList(givLib.yangBikinStruggle, cx)}</div>
+      </div>
+      <div class="section section-flag">
+        <div class="section-header">
+          <div class="section-hd-icon">💚</div>
+          <span class="section-label">Green Flag yang Cocok Buat Kamu</span>
+        </div>
+        <div class="info-list">${infoList(givLib.greenFlag, ck)}</div>
+      </div>
+      ${buildScoreHTML('Tendensi Giving Love Language', 'giving', givResult.scores)}
+    </div>
+
+    <div class="divider"></div>
+    <div class="cta-section">
+      <button class="cta-primary" onclick="window.location.href='index.html'">Ulangi Tes</button>
+    </div>
+    ${shareHTML}
+  `;
+
+  // Animate score bars
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.querySelectorAll('.score-fill').forEach(bar => {
+      bar.style.width = bar.dataset.pct + '%';
+    });
+  }));
+
+  // Set tab-bar sticky top = header height
+  const tabBar = document.getElementById('tabBar');
+  tabBar.style.top = document.querySelector('.header').offsetHeight + 'px';
+
+  // IntersectionObserver: highlight active tab based on scroll
+  const recSec = document.getElementById('tabReceiving');
+  const givSec = document.getElementById('tabGiving');
+  const setActive = (tabId) => {
+    document.querySelectorAll('.tab-btn').forEach(t => {
+      t.classList.toggle('tab-active', t.dataset.tab === tabId);
+    });
+  };
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setActive(entry.target.id === 'tabReceiving' ? 'receiving' : 'giving');
+      }
+    });
+  }, { rootMargin: '-5% 0px -50% 0px', threshold: 0 });
+  obs.observe(recSec);
+  obs.observe(givSec);
+}
+
+window.scrollToTab = function(id) {
+  const section = document.getElementById(id);
+  const headerH = document.querySelector('.header').offsetHeight;
+  const tabH    = (document.getElementById('tabBar') || {offsetHeight: 0}).offsetHeight;
+  const top = section.getBoundingClientRect().top + window.scrollY - headerH - tabH - 4;
+  window.scrollTo({ top, behavior: 'smooth' });
+};
+
+function renderScoreChart(title, t, scores) {
+  el('scoreTitle').textContent = title;
+  const lib = LL.library[t];
+  const entries = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const maxScore = entries[0][1];
+
+  el('scoreChart').innerHTML = entries.map(([code, score], i) => {
+    const pct = Math.round((score / maxScore) * 100);
+    const name = lib[code]?.label || code;
+    const emoji = CODE_EMOJI[code] || '✦';
+    return `
+      <div class="score-row">
+        <div class="score-emoji">${emoji}</div>
+        <div class="score-name">${name}</div>
+        <div class="score-track"><div class="score-fill" data-pct="${pct}" style="background:${BAR_FILLS[i]};"></div></div>
+        <div class="score-pct">${pct}%</div>
+      </div>`;
+  }).join('');
+
+  // Animate bars in after paint
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.querySelectorAll('.score-fill').forEach(bar => {
+      bar.style.width = bar.dataset.pct + '%';
+    });
+  }));
+}
+
+function getShareText() {
+  let text = 'Aku udah cek Love Language-ku di bakat.id!\n';
+  if (recResult) text += `💌 Receiving: ${LL.library.receiving[recResult.primary].label}\n`;
+  if (givResult) text += `🎁 Giving: ${LL.library.giving[givResult.primary].label}\n`;
+  text += '\nCek punya kamu juga →';
+  return text;
+}
+
+function shareToSocial(platform) {
+  const shareUrl  = window.location.href;
+  const shareText = getShareText();
+
+  if (platform === 'copy') {
+    navigator.clipboard.writeText(shareUrl).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = shareUrl; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+    });
+    showToast('🔗 Link tersalin!');
+    return;
+  }
+  switch (platform) {
+    case 'wa':
+      window.open('https://wa.me/?text=' + encodeURIComponent(shareText + '\n' + shareUrl), '_blank');
+      break;
+    case 'x':
+      window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(shareUrl), '_blank');
+      break;
+    case 'instagram':
+      showToast('📸 Screenshot & share ke Instagram!');
+      break;
+    case 'threads':
+      window.open('https://www.threads.net/intent/post?text=' + encodeURIComponent(shareText + ' ' + shareUrl), '_blank');
+      break;
+    case 'native':
+      if (navigator.share) {
+        navigator.share({ title: 'Love Language Report', text: shareText, url: shareUrl }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(shareUrl).catch(() => {});
+        showToast('🔗 Link tersalin!');
+      }
+      break;
+    default:
+      break;
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+/* ── Sparkles ─────────────────────────────── */
+[
+  { s:3, t:'4%',  l:'6%',  d:'2.3s', dl:'0s'    },
+  { s:4, t:'2%',  l:'80%', d:'1.9s', dl:'0.4s'  },
+  { s:2, t:'30%', l:'94%', d:'2.7s', dl:'0.9s'  },
+  { s:3, t:'52%', l:'3%',  d:'2.1s', dl:'0.65s' },
+  { s:2, t:'70%', l:'89%', d:'1.7s', dl:'0.2s'  },
+].forEach(({ s, t, l, d, dl }) => {
+  const sp = document.createElement('div');
+  sp.className = 'sp';
+  sp.style.cssText = `width:${s}px;height:${s}px;top:${t};left:${l};--d:${d};--dl:${dl};`;
+  document.body.appendChild(sp);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil Kombinasi – Love Language</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --lav: #C8405A;
+  --lav-light: #F2A0B0;
+  --lav-pale: #FDF0F2;
+  --lav-deep: #7D1A2E;
+  --cream: #FBF8F4;
+  --warm-white: #FEFCFA;
+  --blush: #F7D6DC;
+  --ink: #1C1016;
+  --ink-mid: #4A2D35;
+  --ink-muted: #8C6870;
+  --gold: #C4923A;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--ink); min-height: 100%;
+  background: var(--warm-white);
+}
+
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(200,64,90,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.app {
+  position: relative; z-index: 1;
+  max-width: 430px; margin: 0 auto;
+  min-height: 100dvh; display: flex; flex-direction: column;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom));
+}
+
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 20px 6px;
+}
+.logo { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; color: var(--ink); }
+.share-btn {
+  background: var(--lav); border: none; border-radius: 100px; padding: 7px 14px;
+  color: #fff; font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12px; font-weight: 500; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(200,64,90,0.28);
+  transition: background 0.18s, transform 0.15s;
+}
+.share-btn:active { transform: scale(0.97); }
+
+.top-section { text-align: center; padding: 6px 24px 0; }
+.top-eyebrow {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--lav); margin-bottom: 4px;
+}
+.top-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 7vw, 32px); font-weight: 700;
+  letter-spacing: -0.01em; line-height: 1.1; color: var(--ink);
+}
+
+/* ── COMBO TYPE BADGE ──────────────────────── */
+.combo-badge {
+  display: flex; justify-content: center; margin-top: 14px;
+}
+.combo-pill {
+  background: linear-gradient(135deg, rgba(200,64,90,0.12) 0%, rgba(125,26,46,0.08) 100%);
+  border: 1px solid rgba(200,64,90,0.28);
+  border-radius: 50px; padding: 8px 20px;
+  font-size: 13px; font-weight: 500; color: var(--lav-deep);
+  text-align: center;
+}
+
+/* ── SIDE-BY-SIDE CARDS ───────────────────── */
+.cards-section {
+  display: flex; gap: 12px; padding: 20px 20px 0;
+  align-items: flex-start;
+}
+.card-col {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+}
+.card-col-label {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 8px;
+}
+.mini-polaroid {
+  background: linear-gradient(180deg, #f7ede0 0%, #ede2d0 100%);
+  border-radius: 12px; padding: 7px 7px 16px; width: 100%;
+  box-shadow:
+    rgba(200,64,90,0.14) 0 6px 24px,
+    rgba(255,252,250,0.5) 2px 2px 0 inset;
+}
+.card-col:first-child .mini-polaroid { transform: rotate(-2deg); animation: pF1 5.8s ease-in-out infinite; }
+.card-col:last-child  .mini-polaroid { transform: rotate( 2deg); animation: pF2 5.2s ease-in-out infinite 0.8s; }
+@keyframes pF1 {
+  0%,100% { transform: rotate(-2deg) translateY(0); }
+  50%      { transform: rotate(-2deg) translateY(-6px); }
+}
+@keyframes pF2 {
+  0%,100% { transform: rotate(2deg) translateY(0); }
+  50%      { transform: rotate(2deg) translateY(-6px); }
+}
+.mini-pi {
+  border-radius: 7px; overflow: hidden;
+  height: 110px; position: relative;
+  box-shadow: rgba(0,0,0,0.12) 0 0 6px inset;
+}
+.mini-pi-bg  { position: absolute; inset: 0; }
+.mini-pi-gl  { position: absolute; bottom: 0; left: -40%; width: 180%; height: 65%; background: radial-gradient(50% 50%,rgba(200,64,90,0.8) 20%,rgba(200,64,90,0)); display: none; }
+.mini-pi-gr  { position: absolute; bottom: 0; right: -40%; width: 130%; height: 55%; background: radial-gradient(50% 50%,rgba(125,26,46,0.8),rgba(125,26,46,0)); display: none; }
+.mini-pi-gc  { position: absolute; bottom: -5%; left: 10%; width: 80%; height: 40%; background: radial-gradient(50% 50%,rgba(200,64,90,0.7),rgba(200,64,90,0)); display: none; }
+.mini-pi-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 20px 6px 6px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.70));
+  font-size: 9px; font-weight: 700; color: #fff;
+  text-align: center; line-height: 1.3;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+}
+.mini-emoji {
+  text-align: center; font-size: 24px; margin: 7px 0 3px;
+}
+.mini-name {
+  text-align: center; font-size: 11px; font-weight: 700;
+  color: var(--ink-mid); line-height: 1.2;
+}
+
+/* ── NARASI ───────────────────────────────── */
+.narasi-block {
+  margin: 18px 22px 0;
+  padding: 18px 20px 16px;
+  background: rgba(200,64,90,0.05);
+  border: 1px solid rgba(200,64,90,0.18);
+  border-radius: 14px;
+  font-size: 13.5px; font-weight: 400; color: var(--ink-mid);
+  line-height: 1.75;
+  position: relative; overflow: hidden;
+}
+.narasi-block::before {
+  content: '✦';
+  position: absolute; top: 10px; right: 14px;
+  font-size: 22px; color: var(--lav-light); opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ── GREEN FLAGS ──────────────────────────── */
+.flags-section { margin: 18px 22px 0; }
+.section-eyebrow {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--lav); margin-bottom: 10px; display: block;
+}
+.flag-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px; border-radius: 12px;
+  background: rgba(200,64,90,0.04);
+  border: 1px solid rgba(200,64,90,0.12);
+  margin-bottom: 7px;
+}
+.flag-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--lav); flex-shrink: 0; margin-top: 5px;
+}
+.flag-text { font-size: 13px; color: var(--ink-mid); line-height: 1.5; }
+
+.divider {
+  height: 1px; margin: 18px 22px 0;
+  background: linear-gradient(90deg, transparent, rgba(200,64,90,0.18), transparent);
+}
+
+.cta-section {
+  padding: 18px 22px 0;
+  display: flex; flex-direction: column; gap: 9px;
+}
+.cta-primary {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; border: none; border-radius: 100px; padding: 14px 24px;
+  background: var(--lav);
+  box-shadow: 0 4px 20px rgba(200,64,90,0.30);
+  cursor: pointer; font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 500; font-size: 14px; color: #fff;
+  transition: transform 0.18s, background 0.18s;
+}
+.cta-primary:hover { background: var(--lav-deep); transform: translateY(-2px); }
+.cta-primary:active { transform: scale(0.97); }
+.cta-secondary {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; border: 1px solid rgba(200,64,90,0.25); border-radius: 100px;
+  padding: 13px 24px; background: transparent;
+  cursor: pointer; font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 400; font-size: 13px; color: var(--ink-mid);
+  transition: border-color 0.18s, color 0.18s;
+}
+.cta-secondary:hover { border-color: var(--lav); color: var(--lav); }
+.cta-row {
+  display: flex; gap: 8px; width: 100%;
+}
+.cta-row .cta-secondary { flex: 1; font-size: 12px; padding: 12px 10px; }
+.cta-ghost {
+  background: none; border: none; cursor: pointer;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12.5px; color: var(--ink-muted); text-align: center;
+}
+.cta-ghost:hover { color: var(--lav); }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="app">
+
+  <div class="header">
+    <div class="logo">bakat.id</div>
+    <button class="share-btn" onclick="shareResult()">Bagikan ↗</button>
+  </div>
+
+  <div class="top-section">
+    <div class="top-eyebrow">✨ Profil Kombinasi</div>
+    <div class="top-title">Love Language<br>Kamu Secara Utuh</div>
+  </div>
+
+  <div class="combo-badge">
+    <div class="combo-pill" id="comboPill">—</div>
+  </div>
+
+  <!-- SIDE-BY-SIDE CARDS -->
+  <div class="cards-section">
+    <div class="card-col">
+      <div class="card-col-label">💌 Receiving</div>
+      <div class="mini-polaroid">
+        <div class="mini-pi">
+          <div class="mini-pi-bg" id="recBg"></div>
+          <div class="mini-pi-gl"></div>
+          <div class="mini-pi-gr"></div>
+          <div class="mini-pi-gc"></div>
+          <div class="mini-pi-label" id="recLabel"></div>
+        </div>
+        <div class="mini-emoji" id="recEmoji"></div>
+        <div class="mini-name" id="recName"></div>
+      </div>
+    </div>
+    <div class="card-col">
+      <div class="card-col-label">🎁 Giving</div>
+      <div class="mini-polaroid">
+        <div class="mini-pi">
+          <div class="mini-pi-bg" id="givBg"></div>
+          <div class="mini-pi-gl"></div>
+          <div class="mini-pi-gr"></div>
+          <div class="mini-pi-gc"></div>
+          <div class="mini-pi-label" id="givLabel"></div>
+        </div>
+        <div class="mini-emoji" id="givEmoji"></div>
+        <div class="mini-name" id="givName"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NARASI KOMBINASI -->
+  <div class="narasi-block" id="narasiBlock"></div>
+
+  <!-- GREEN FLAGS -->
+  <div class="flags-section">
+    <span class="section-eyebrow">Green Flag Kamu dalam Hubungan</span>
+    <div id="flagsList"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cta-section">
+    <button class="cta-primary" onclick="window.location.href='report.html?type=combined'">
+      Lihat Laporan Lengkap
+    </button>
+    <div class="cta-row">
+      <button class="cta-secondary" onclick="window.location.href='report.html?type=receiving'">💌 Laporan Receiving</button>
+      <button class="cta-secondary" onclick="window.location.href='report.html?type=giving'">🎁 Laporan Giving</button>
+    </div>
+    <button class="cta-ghost" onclick="window.location.href='index.html'">← Kembali ke Beranda</button>
+  </div>
+
+</div>
+
+<script src="data/love_language_data.js"></script>
+<script>
+const recResult = JSON.parse(localStorage.getItem('llResultReceiving') || 'null');
+const givResult = JSON.parse(localStorage.getItem('llResultGiving')   || 'null');
+
+if (!recResult || !givResult) {
+  window.location.href = 'index.html';
+} else {
+  buildPage();
+}
+
+function buildPage() {
+  const recLib = LL.library.receiving[recResult.primary];
+  const givLib = LL.library.giving[givResult.primary];
+  const comboKey = `${recResult.primary}-${givResult.primary}`;
+  const combo = LL.kombinasi[comboKey];
+
+  // Combo badge
+  document.getElementById('comboPill').textContent = combo ? combo.type : `${recLib.label} × ${givLib.label}`;
+
+  // Receiving card
+  document.getElementById('recBg').style.background    = recLib.bg;
+  document.getElementById('recLabel').textContent       = recLib.label;
+  document.getElementById('recEmoji').textContent       = recLib.emoji;
+  document.getElementById('recName').textContent        = recLib.label;
+
+  // Giving card
+  document.getElementById('givBg').style.background    = givLib.bg;
+  document.getElementById('givLabel').textContent       = givLib.label;
+  document.getElementById('givEmoji').textContent       = givLib.emoji;
+  document.getElementById('givName').textContent        = givLib.label;
+
+  // Narasi kombinasi
+  document.getElementById('narasiBlock').textContent = combo
+    ? combo.narasi
+    : `Receiving-mu adalah ${recLib.label}, sedangkan cara kamu menunjukkan cinta adalah lewat ${givLib.label}. Kamu punya kombinasi yang unik!`;
+
+  // Green flags (dari reciving primary)
+  const flags = recLib.greenFlag || [];
+  document.getElementById('flagsList').innerHTML = flags.map(f => `
+    <div class="flag-row">
+      <div class="flag-dot"></div>
+      <div class="flag-text">${f}</div>
+    </div>
+  `).join('');
+}
+
+function shareResult() {
+  const recLib = LL.library.receiving[recResult.primary];
+  const givLib = LL.library.giving[givResult.primary];
+  const comboKey = `${recResult.primary}-${givResult.primary}`;
+  const combo = LL.kombinasi[comboKey];
+  const text = `Love Language-ku:\n💌 Receiving: ${recLib.label} ${recLib.emoji}\n🎁 Giving: ${givLib.label} ${givLib.emoji}\n\n${combo ? combo.type : ''}\n\nCari tahu love language kamu di bakat.id`;
+  if (navigator.share) {
+    navigator.share({ text });
+  } else {
+    navigator.clipboard?.writeText(text);
+  }
+}
+</script>
+</body>
+</html>
