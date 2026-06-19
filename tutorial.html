@@ -14,6 +14,7 @@
   --ink: #1C1016;
   --ink-mid: #4A2D35;
   --ink-muted: #8C6870;
+  --gold: #C4923A;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -50,6 +51,17 @@ html, body {
   transition: color 0.2s;
 }
 .skip-btn:hover { color: var(--lav); }
+
+/* ── TUTORIAL BANNER ──────────────────── */
+.tutorial-banner {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 7px 20px;
+  background: rgba(196,146,58,0.10);
+  border-bottom: 1px solid rgba(196,146,58,0.22);
+  font-size: 12px; font-weight: 500; color: var(--gold);
+  letter-spacing: 0.03em; flex-shrink: 0;
+}
+.tutorial-banner-icon { font-size: 13px; }
 
 /* ── STEPS ──────────────────────────── */
 .content-wrap { flex: 1; position: relative; overflow: hidden; }
@@ -268,6 +280,11 @@ html, body {
   <div class="header">
     <div class="logo">bakat.id</div>
     <button class="skip-btn" onclick="goToTest(event)">Lewati →</button>
+  </div>
+
+  <div class="tutorial-banner">
+    <span class="tutorial-banner-icon">📖</span>
+    <span>Panduan · Ini bukan soal aslinya</span>
   </div>
 
   <div class="content-wrap">
