@@ -380,6 +380,43 @@ html, body {
 .share-icon-btn.copy    { background: rgba(200,64,90,0.08);   border-color: rgba(200,64,90,0.22); }
 .share-icon-btn.more    { background: rgba(196,146,58,0.10);  border-color: rgba(196,146,58,0.25); }
 
+/* ── SUITE NUDGE ──────────────────────────── */
+.suite-nudge {
+  padding: 20px 20px 0;
+  border-top: 1px solid rgba(200,64,90,0.12);
+  margin-top: 20px;
+}
+.suite-nudge-text {
+  font-size: 12.5px; color: var(--ink-muted);
+  line-height: 1.75; text-align: center; margin-bottom: 14px;
+}
+.suite-nudge-text em { font-style: normal; color: var(--lav); font-weight: 500; }
+.suite-nudge-list { display: flex; flex-direction: column; gap: 8px; }
+.suite-nudge-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; border-radius: 12px;
+  background: rgba(200,64,90,0.05);
+  border: 1px solid rgba(200,64,90,0.14);
+  cursor: pointer; text-align: left;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  width: 100%; transition: background 0.18s;
+}
+.suite-nudge-item:hover { background: rgba(200,64,90,0.10); }
+.suite-nudge-item.soon { opacity: 0.52; cursor: default; pointer-events: none; }
+.suite-nudge-cs {
+  font-size: 9.5px; font-weight: 600; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--ink-muted);
+  background: rgba(140,104,112,0.09);
+  border: 1px solid rgba(140,104,112,0.16);
+  border-radius: 100px; padding: 2px 8px;
+  flex-shrink: 0; white-space: nowrap;
+}
+.suite-nudge-item-info { flex: 1; min-width: 0; }
+.suite-nudge-item-name { font-size: 12.5px; font-weight: 600; color: var(--lav); margin-bottom: 2px; }
+.suite-nudge-item-desc { font-size: 11px; color: var(--ink-muted); line-height: 1.4; }
+.suite-nudge-item-icon { font-size: 20px; flex-shrink: 0; }
+.suite-nudge-item-arrow { font-size: 14px; color: var(--lav); flex-shrink: 0; }
+
 /* ── SPARKLES ─────────────────────────────── */
 .sp {
   position: fixed; background: var(--lav-light); border-radius: 50%;
@@ -586,6 +623,29 @@ html, body {
         </svg>
       </button>
 
+    </div>
+  </div>
+
+  <!-- SUITE NUDGE -->
+  <div class="suite-nudge">
+    <p class="suite-nudge-text">Love Language baru satu sisi dari cara kamu mencintai. <em>Explore lebih jauh.</em></p>
+    <div class="suite-nudge-list">
+      <button class="suite-nudge-item" onclick="window.location.href='../Love Type/index.html'">
+        <span class="suite-nudge-item-icon">❤️</span>
+        <div class="suite-nudge-item-info">
+          <div class="suite-nudge-item-name">Love Type</div>
+          <div class="suite-nudge-item-desc">Kamu jatuh cinta seperti apa — intim, penuh gairah, atau komitmen?</div>
+        </div>
+        <span class="suite-nudge-item-arrow">→</span>
+      </button>
+      <button class="suite-nudge-item soon" disabled>
+        <span class="suite-nudge-item-icon">⚡</span>
+        <div class="suite-nudge-item-info">
+          <div class="suite-nudge-item-name">Conflict Language</div>
+          <div class="suite-nudge-item-desc">Gimana kamu saat ada gesekan dalam hubungan?</div>
+        </div>
+        <span class="suite-nudge-cs">Segera</span>
+      </button>
     </div>
   </div>
 
@@ -832,6 +892,27 @@ function buildCombined() {
       <button class="cta-primary" onclick="window.location.href='index.html'">Ulangi Tes</button>
     </div>
     ${shareHTML}
+    <div class="suite-nudge">
+      <p class="suite-nudge-text">Love Language baru satu sisi dari cara kamu mencintai. <em>Explore lebih jauh.</em></p>
+      <div class="suite-nudge-list">
+        <button class="suite-nudge-item" onclick="window.location.href='../Love Type/index.html'">
+          <span class="suite-nudge-item-icon">❤️</span>
+          <div class="suite-nudge-item-info">
+            <div class="suite-nudge-item-name">Love Type</div>
+            <div class="suite-nudge-item-desc">Kamu jatuh cinta seperti apa — intim, penuh gairah, atau komitmen?</div>
+          </div>
+          <span class="suite-nudge-item-arrow">→</span>
+        </button>
+        <button class="suite-nudge-item soon" disabled>
+          <span class="suite-nudge-item-icon">⚡</span>
+          <div class="suite-nudge-item-info">
+            <div class="suite-nudge-item-name">Conflict Language</div>
+            <div class="suite-nudge-item-desc">Gimana kamu saat ada gesekan dalam hubungan?</div>
+          </div>
+          <span class="suite-nudge-cs">Segera</span>
+        </button>
+      </div>
+    </div>
   `;
 
   // Animate score bars
