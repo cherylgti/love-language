@@ -370,6 +370,7 @@ html, body {
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="data/love_language_data.js"></script>
 <script>
 // ── PAGE TRANSITIONS ─────────────────────────────────────────
@@ -651,7 +652,255 @@ function finishSubtest() {
   const key = `llResult${mode.charAt(0).toUpperCase() + mode.slice(1)}`;
   localStorage.setItem(key, JSON.stringify(result));
   localStorage.setItem(`llAnswers${mode.charAt(0).toUpperCase() + mode.slice(1)}`, JSON.stringify(answers));
-  rippleTo(null, `result.html?type=${mode}`);
+  triggerStackingTransition(result, `result.html?type=${mode}`);
+}
+
+/* ── STACKING CARDS TRANSITION ───────────────────────────────────────── */
+const LL_IMG_MAP = {
+  A: 'assets/words-of-affirmation.png',
+  B: 'assets/quality-time.png',
+  C: 'assets/receiving-gifts.png',
+  D: 'assets/act-of-service.png',
+  E: 'assets/physical-touch.png',
+};
+const LL_NAME_MAP = {
+  A: 'Words of Affirmation',
+  B: 'Quality Time',
+  C: 'Receiving Gifts',
+  D: 'Acts of Service',
+  E: 'Physical Touch',
+};
+
+function triggerStackingTransition(result, url) {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = [
+    'position:fixed;inset:0;z-index:4000;',
+    'background:#F5EDF2;',
+    'opacity:0;transition:opacity 0.35s ease;',
+    'overflow:hidden;',
+  ].join('');
+
+  const bgEl = document.createElement('div');
+  bgEl.style.cssText = [
+    'position:absolute;inset:0;',
+    'background:radial-gradient(ellipse at 50% 40%,rgba(200,64,90,0.28) 0%,rgba(125,26,46,0.10) 55%,transparent 80%);',
+  ].join('');
+  overlay.appendChild(bgEl);
+
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+  overlay.appendChild(canvas);
+
+  const imgSrc = LL_IMG_MAP[result.primary] || 'assets/words-of-affirmation.png';
+  const llName = LL_NAME_MAP[result.primary] || '';
+  const polaroidWrap = document.createElement('div');
+  polaroidWrap.style.cssText = [
+    'position:absolute;left:50%;bottom:-380px;',
+    'transform:translateX(-50%) rotate(2.5deg);',
+    'width:min(220px,calc(100vw - 80px));',
+    'z-index:20;opacity:0;transition:none;',
+    'will-change:bottom,opacity;',
+  ].join('');
+  polaroidWrap.innerHTML = `
+    <div style="
+      background:linear-gradient(180deg,#f7ede0 0%,#ede2d0 100%);
+      border-radius:14px;padding:8px 8px 22px;
+      box-shadow:rgba(200,64,90,0.18) 0 8px 32px,rgba(0,0,0,0.06) 0 2px 8px;
+    ">
+      <div style="border-radius:8px;overflow:hidden;height:158px;position:relative;">
+        <img src="${imgSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 8px 7px;
+          background:linear-gradient(transparent,rgba(0,0,0,0.65));
+          font-size:10px;font-weight:600;color:#fff;text-align:center;
+          font-family:'DM Sans',sans-serif;letter-spacing:0.04em;">
+          ${llName}</div>
+      </div>
+    </div>`;
+  overlay.appendChild(polaroidWrap);
+  document.body.appendChild(overlay);
+
+  requestAnimationFrame(() => {
+    overlay.style.opacity = '1';
+    setTimeout(() => _runStackingAnimation(canvas, overlay, polaroidWrap, url), 120);
+  });
+}
+
+function _runStackingAnimation(canvas, overlay, polaroidWrap, url) {
+  const W   = window.innerWidth;
+  const H   = window.innerHeight;
+  const DPR = Math.min(window.devicePixelRatio, 2);
+
+  const isMob = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !isMob, alpha: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(DPR, isMob ? 1.5 : 2));
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, W / H, 0.1, 60);
+  camera.position.set(0, 0, 9);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const key = new THREE.DirectionalLight(0xfff5e8, 1.6);
+  key.position.set(2, 4, 7);
+  scene.add(key);
+  const fill = new THREE.DirectionalLight(0xF49CBB, 0.30);
+  fill.position.set(-3, -2, 5);
+  scene.add(fill);
+
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(20, 20),
+    new THREE.ShadowMaterial({ opacity: 0.20 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -4.2;
+  scene.add(floor);
+
+  const CW = 2.0, CH = 2.68, CD = 0.05;
+
+  const Q_GRADS = [
+    ['#C8405A','#7D1A2E'], ['#7D1A2E','#1C1016'], ['#F2A0B0','#C8405A'],
+    ['#C4923A','#8C601A'], ['#1C1016','#0F0810'], ['#C8405A','#C4923A'],
+    ['#7D1A2E','#C8405A'], ['#8C6870','#4A2D35'], ['#F2A0B0','#7D1A2E'],
+    ['#1C1016','#7D1A2E'], ['#C8405A','#1C1016'],
+  ];
+
+  function makeGradTex(top, bot) {
+    const c = document.createElement('canvas');
+    c.width = 256; c.height = 350;
+    const ctx = c.getContext('2d');
+    const g = ctx.createLinearGradient(0, 0, 0, 350);
+    g.addColorStop(0, top); g.addColorStop(1, bot);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, 256, 350);
+    const r1 = ctx.createRadialGradient(30, 350, 0, 30, 350, 180);
+    r1.addColorStop(0, 'rgba(200,64,90,0.22)'); r1.addColorStop(1, 'rgba(200,64,90,0)');
+    ctx.fillStyle = r1; ctx.fillRect(0, 0, 256, 350);
+    const r2 = ctx.createRadialGradient(226, 350, 0, 226, 350, 150);
+    r2.addColorStop(0, 'rgba(196,146,58,0.18)'); r2.addColorStop(1, 'rgba(196,146,58,0)');
+    ctx.fillStyle = r2; ctx.fillRect(0, 0, 256, 350);
+    ctx.strokeStyle = 'rgba(200,64,90,0.20)';
+    ctx.lineWidth = 7; ctx.strokeRect(3.5, 3.5, 249, 343);
+    return new THREE.CanvasTexture(c);
+  }
+
+  function makeBackTex() {
+    const c = document.createElement('canvas');
+    c.width = 256; c.height = 350;
+    const ctx = c.getContext('2d');
+    const g = ctx.createLinearGradient(0, 0, 0, 350);
+    g.addColorStop(0, '#F2A0B0'); g.addColorStop(1, '#7D1A2E');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, 256, 350);
+    return new THREE.CanvasTexture(c);
+  }
+
+  const visH = 2 * Math.tan(19 * Math.PI / 180) * camera.position.z;
+  const DECK_Y = -(visH / 2) + CH * 0.78;
+
+  const NUM_CARDS = 11;
+  const cardMeshes = [];
+  for (let i = 0; i < NUM_CARDS; i++) {
+    const [top, bot] = Q_GRADS[i];
+    const geo  = new THREE.BoxGeometry(CW, CH, CD);
+    const mats = [
+      new THREE.MeshLambertMaterial({ color: 0xf5e0e8 }),
+      new THREE.MeshLambertMaterial({ color: 0xf5e0e8 }),
+      new THREE.MeshLambertMaterial({ color: 0xfbf6f0 }),
+      new THREE.MeshLambertMaterial({ color: 0xfbf6f0 }),
+      new THREE.MeshPhongMaterial({ map: makeGradTex(top, bot), shininess: 35 }),
+      new THREE.MeshPhongMaterial({ map: makeBackTex(), shininess: 18 }),
+    ];
+    const mesh = new THREE.Mesh(geo, mats);
+    mesh.position.set(0, 2.0, -i * 0.06);
+    mesh.visible = false;
+    scene.add(mesh);
+    cardMeshes.push(mesh);
+  }
+
+  function eOut3(t)      { return 1 - (1 - t) ** 3; }
+  function eIO3(t)       { return t < 0.5 ? 4*t*t*t : 1 - ((-2*t+2)**3)/2; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  const stackTargets = cardMeshes.map((_, i) => ({
+    y:  DECK_Y + i * 0.028,
+    z:  -i * 0.05,
+    rz: (i % 2 === 0 ? 1 : -1) * (0.018 + i * 0.007),
+    rx: -0.04,
+  }));
+
+  const ENTER_START    = 0.20;
+  const ENTER_DUR      = 0.55;
+  const STAGGER        = 0.08;
+  const COMPRESS_START = ENTER_START + NUM_CARDS * STAGGER + ENTER_DUR - 0.30;
+  const COMPRESS_DUR   = 0.65;
+  const SHUFFLE_START  = COMPRESS_START + COMPRESS_DUR + 0.05;
+  const RESULT_START   = SHUFFLE_START + 0.50;
+  const FADEOUT_START  = RESULT_START  + 1.80;
+
+  let elapsed = 0, resultShown = false, navScheduled = false, animStopped = false;
+  let lastTime = performance.now();
+
+  function tick(now) {
+    if (animStopped) return;
+    const dt = Math.min((now - lastTime) / 1000, 0.05);
+    lastTime = now;
+    elapsed += dt;
+
+    cardMeshes.forEach((mesh, i) => {
+      const enterAt = ENTER_START + i * STAGGER;
+      if (elapsed < enterAt) return;
+      mesh.visible = true;
+      const tgt = stackTargets[i];
+      let targetY = tgt.y, targetRz = tgt.rz, targetZ = tgt.z;
+
+      if (elapsed >= COMPRESS_START) {
+        const ct  = Math.min(1, (elapsed - COMPRESS_START) / COMPRESS_DUR);
+        const cet = eIO3(ct);
+        targetY  = lerp(tgt.y,  DECK_Y + i * 0.016,                  cet);
+        targetRz = lerp(tgt.rz, (i % 2 === 0 ? 1 : -1) * i * 0.006, cet);
+        targetZ  = lerp(tgt.z,  -i * 0.06,                            cet);
+      }
+
+      if (elapsed >= SHUFFLE_START) {
+        const st = elapsed - SHUFFLE_START;
+        const decay = Math.exp(-st * 2.8);
+        mesh.rotation.z  = targetRz + Math.sin(st * 6.2 + i * 1.15) * 0.014 * decay;
+        mesh.position.y  = targetY  + Math.sin(st * 5.1 + i * 0.75) * 0.007 * decay;
+        mesh.position.z  = targetZ;
+        mesh.rotation.x  = tgt.rx;
+        return;
+      }
+
+      const et = eOut3(Math.min(1, (elapsed - enterAt) / ENTER_DUR));
+      mesh.position.y  = lerp(2.0, targetY,  et);
+      mesh.position.z  = targetZ;
+      mesh.rotation.z  = lerp(0,   targetRz, et);
+      mesh.rotation.x  = tgt.rx;
+    });
+
+    if (elapsed >= RESULT_START && !resultShown) {
+      resultShown = true;
+      polaroidWrap.style.transition = 'bottom 1.35s cubic-bezier(0.22,1,0.36,1), opacity 0.55s ease';
+      polaroidWrap.style.bottom  = '33%';
+      polaroidWrap.style.opacity = '1';
+    }
+
+    if (elapsed >= FADEOUT_START && !navScheduled) {
+      navScheduled = true;
+      overlay.style.transition      = 'opacity 0.65s ease';
+      overlay.style.opacity         = '0';
+      polaroidWrap.style.transition = 'opacity 0.65s ease';
+      polaroidWrap.style.opacity    = '0';
+      setTimeout(() => {
+        animStopped = true;
+        renderer.dispose();
+        window.location.href = url;
+      }, 680);
+    }
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
 }
 
 function calculateScore(answers, questions) {
